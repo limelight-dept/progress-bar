@@ -1,13 +1,81 @@
 <!DOCTYPE html>
 <html>
   <head>
-		<link src="src/styles.css"></link>
+		<link href="src/styles.css"></link>
     <title>Progress Bar Example</title>
     <meta charset="UTF-8" />
   </head>
 
   <body>
-		<h1>Progress Bar Example</h1>
-    <script src="src/index.js"></script>
+    <h1>Progress Bar Example</h1>
+
+    <div class="container" id="example-1">
+      <progress max="10" value="2"></progress>
+    </div>
+
+    <div class="container" id="example-2">
+      <div class="progress-custom">
+          <div id="custom-progress-bar" role="progressbar" class="progress-bar-custom" aria-valuemin="0" aria-valuemax="10" aria-valuenow="3" style="width:30%">
+               30%
+          </div>
+      </div>
+    </div>
+    <div class="container" id="example-action">
+      <button onclick="progress()" id="progress-button">Progress the second progress bar.</button>
+      <button onclick="regress()" id="progress-button">Regress the second progress bar.</button>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    <script type="text/javascript">
+      var regress = function() {
+        var min = document.getElementById("custom-progress-bar").getAttribute('aria-valuemin');
+        var max = document.getElementById("custom-progress-bar").getAttribute('aria-valuemax');
+        var value = document.getElementById("custom-progress-bar").getAttribute('aria-valuenow');
+        if(value <= 0){
+          return;
+        }
+        var newvalue = parseFloat(value) - 1;
+        var percent = newvalue*10 + '%';
+        document.getElementById("custom-progress-bar").setAttribute('aria-valuenow',newvalue);
+        document.getElementById("custom-progress-bar").style.width = percent;
+        document.getElementById("custom-progress-bar").textContent = percent;
+      };
+      var progress = function() {
+        var min = document.getElementById("custom-progress-bar").getAttribute('aria-valuemin');
+        var max = document.getElementById("custom-progress-bar").getAttribute('aria-valuemax');
+        var value = document.getElementById("custom-progress-bar").getAttribute('aria-valuenow');
+        if(value >= 10){
+          return;
+        }
+        var newvalue = parseFloat(value) + 1;
+        var percent = newvalue*10 + '%';
+        document.getElementById("custom-progress-bar").setAttribute('aria-valuenow',newvalue);
+        document.getElementById("custom-progress-bar").style.width = percent;
+        document.getElementById("custom-progress-bar").textContent = percent;
+      };
+
+  </script>
   </body>
 </html>
